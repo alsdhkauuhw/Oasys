@@ -4,7 +4,7 @@ spring:
   application:
     name: gateway
   jackson:
-    default-property-inclusion: non_null
+    default-property-inclusion: NON_NULL
   security:
     oauth2:
       resourceserver:
@@ -24,7 +24,9 @@ spring:
         add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowedOrigins: http://localhost:3000
+            allowedOrigins: 
+            - http://localhost:3000
+            - http://localhost:3001
             allowedHeaders: Content-Type, Authorization
             allowedMethods: GET, POST, PUT, DELETE, OPTIONS
       routes:

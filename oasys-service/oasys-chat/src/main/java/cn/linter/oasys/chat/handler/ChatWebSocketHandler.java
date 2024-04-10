@@ -3,6 +3,8 @@ package cn.linter.oasys.chat.handler;
 import cn.linter.oasys.chat.container.SessionContainer;
 import cn.linter.oasys.chat.entity.Message;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -21,7 +23,8 @@ import java.util.Map;
 @Slf4j
 @Component
 public class ChatWebSocketHandler extends TextWebSocketHandler {
-
+    
+    @Autowired
     private final ChatMessagePublisher chatMessagePublisher;
 
     public ChatWebSocketHandler(ChatMessagePublisher chatMessagePublisher) {

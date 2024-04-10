@@ -4,7 +4,7 @@
  Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 80022
- Source Host           : localhost:3306
+ Source Host           : localhost:oasys
  Source Schema         : oasys
 
  Target Server Type    : MySQL

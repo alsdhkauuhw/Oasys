@@ -47,7 +47,27 @@ public class WebFluxSecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.authorizeExchange()
+        if (http != null) {
+            http.authorizeExchange()
+                    .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                    .pathMatchers("/api/chat").permitAll()
+                    .pathMatchers("/api/oauth/token").permitAll()
+                    .pathMatchers("/api/oauth/user/**").authenticated()
+                    .anyExchange().access(authorizationManager)
+                    .and().exceptionHandling()
+                    .authenticationEntryPoint((exchange, exception) -> sendRestResponse(exchange,
+                            HttpStatus.UNAUTHORIZED, ResultStatus.UNAUTHORIZED))
+                    .accessDeniedHandler((exchange, exception) -> sendRestResponse(exchange,
+                            HttpStatus.FORBIDDEN, ResultStatus.FORBIDDEN))
+                    .and().csrf().disable()
+                    .oauth2ResourceServer(oauth2 -> oauth2
+                            .jwt(jwt -> jwt.jwtAuthenticationConverter(getJwtAuthenticationConverter()))
+                            .authenticationEntryPoint((exchange, exception) -> sendRestResponse(exchange,
+                                    HttpStatus.UNAUTHORIZED, ResultStatus.TOKEN_IS_INVALID)));
+            return http.build();
+        }
+        return null;
+        /* http.authorizeExchange()
                 .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .pathMatchers("/api/chat").permitAll()
                 .pathMatchers("/api/oauth/token").permitAll()
@@ -66,7 +86,7 @@ public class WebFluxSecurityConfig {
                         .authenticationEntryPoint((exchange, exception) -> sendRestResponse(exchange,
                                 HttpStatus.UNAUTHORIZED, ResultStatus.TOKEN_IS_INVALID)
                         ));
-        return http.build();
+        return http.build(); */
     }
 
     public Converter<Jwt, Mono<AbstractAuthenticationToken>> getJwtAuthenticationConverter() {

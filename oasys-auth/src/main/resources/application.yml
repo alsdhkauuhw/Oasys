@@ -4,7 +4,7 @@ spring:
   application:
     name: auth-service
   jackson:
-    default-property-inclusion: non_null
+    default-property-inclusion: NON_NULL
   cloud:
     nacos:
       discovery:

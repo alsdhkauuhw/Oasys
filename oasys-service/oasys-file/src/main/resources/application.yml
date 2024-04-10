@@ -7,11 +7,12 @@ spring:
     multipart:
       max-file-size: 50MB
   datasource:
-    url: jdbc:mysql://localhost/oasys?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/oasys?serverTimezone=UTC&useSSL=false
     username: root
-    password: 123456
+    password: 136623
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
-    default-property-inclusion: non_null
+    default-property-inclusion: NON_NULL
   cloud:
     nacos:
       discovery:

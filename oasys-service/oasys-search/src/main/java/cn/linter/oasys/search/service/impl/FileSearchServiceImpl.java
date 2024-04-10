@@ -3,6 +3,8 @@ package cn.linter.oasys.search.service.impl;
 import cn.linter.oasys.search.entity.File;
 import cn.linter.oasys.search.repository.FileSearchRepository;
 import cn.linter.oasys.search.service.FileSearchService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +18,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FileSearchServiceImpl implements FileSearchService {
-
+    
+    @Autowired
     private final FileSearchRepository fileSearchRepository;
 
     public FileSearchServiceImpl(FileSearchRepository fileSearchRepository) {

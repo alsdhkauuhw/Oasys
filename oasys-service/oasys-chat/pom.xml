@@ -51,6 +51,7 @@
             <artifactId>pulsar-client</artifactId>
             <version>${pulsar.version}</version>
         </dependency>
+        
     </dependencies>
 
 </project>
